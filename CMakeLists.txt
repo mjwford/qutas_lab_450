@@ -125,8 +125,8 @@ add_library(area_map src/area_map/area_map.cpp)
 add_dependencies(area_map ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Area Visualization Library
-#add_library(area_viz src/area_viz/area_viz.cpp)
-#add_dependencies(area_viz ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_library(area_viz src/area_viz/area_viz.cpp)
+add_dependencies(area_viz ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Area Map Node
 add_executable(area_map_node src/area_map_node.cpp)
@@ -134,9 +134,9 @@ add_dependencies(area_map_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPO
 target_link_libraries(area_map_node area_map ${catkin_LIBRARIES})
 
 ## Area Visualization Node
-#add_executable(area_viz_node src/area_viz_node.cpp)
-#add_dependencies(area_viz_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-#target_link_libraries(area_viz_node area_viz ${catkin_LIBRARIES})
+add_executable(area_viz_node src/area_viz_node.cpp)
+add_dependencies(area_viz_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(area_viz_node area_viz ${catkin_LIBRARIES})
 
 #############
 ## Install ##

@@ -2,21 +2,32 @@
 
 #include <ros/ros.h>
 
-#include <geometry_msgs/TransformStamped.h>
+#include <nav_msgs/OccupancyGrid.h>
+#include <visualization_msgs/MarkerArray.h>
 
-class Spinner {
+#include <string>
+
+class AreaViz {
 	private:
 		ros::NodeHandle nh_;
-		ros::Timer timer_;
-		ros::Publisher pub_ping_;
-		ros::Subscriber sub_transform_;
-		ros::Publisher pub_pose_;
+		ros::Subscriber sub_grid_;
+		ros::Publisher pub_markers_;
+
+		std::string topic_grid_;
+		std::string topic_markers_;
+		std::string topic_marker_namespace_;
+		double param_marker_height_;
+		double param_marker_alpha_;
+		double param_marker_red_;
+		double param_marker_green_;
+		double param_marker_blue_;
+
+		visualization_msgs::MarkerArray msg_out_;
 
 	public:
-		Spinner( void );
+		AreaViz( void );
 
-		~Spinner( void );
+		~AreaViz( void );
 
-		void callback_ping(const ros::TimerEvent& e);
-		void callback_transform(const geometry_msgs::TransformStamped::ConstPtr& msg_in);
+		void callback_grid(const nav_msgs::OccupancyGrid::ConstPtr& msg_in);
 };
