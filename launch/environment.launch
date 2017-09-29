@@ -1,0 +1,21 @@
+<launch>
+	<!-- Common Settings -->
+	<arg name="frame_id" default="/map" />
+
+
+	<!-- VICON Bridge -->
+	<!--include file="$(find vicon_bridge)/launch/vicon.launch"-->
+		<!--arg name="frame_id" value="$(arg frame_id)" /-->
+	<!--/include-->
+
+
+	<!-- Occupancy Grid -->
+	<node pkg="qutas_lab_450" type="area_map_node" name="area_map" clear_params="true" output="screen">
+		<param name="topic_map" value="/grid" type="str" />
+		<param name="frame_id" value="$(arg frame_id)" type="str" />
+
+		<!-- Map Parameters /-->
+		<rosparam command="load" file="$(find qutas_lab_450)/launch/map_layout.yaml"/>
+	</node>
+
+</launch>
