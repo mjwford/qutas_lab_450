@@ -5,9 +5,9 @@
 
 
 	<!-- VICON Bridge -->
-	<!--include file="$(find vicon_bridge)/launch/vicon.launch"-->
-		<!--arg name="frame_id" value="$(arg frame_id)" /-->
-	<!--/include-->
+	<include file="$(find vicon_bridge)/launch/vicon.launch">
+		<arg name="frame_id" value="$(arg frame_id)" />
+	</include>
 
 
 	<!-- Occupancy Grid -->
