@@ -8,6 +8,10 @@ add_compile_options(-std=c++11)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
+  std_msgs
+  geometry_msgs
+  sensor_msgs
+  mavros_msgs
   visualization_msgs
   nav_msgs
   roscpp
@@ -172,6 +176,12 @@ target_link_libraries(area_viz_node area_viz ${catkin_LIBRARIES})
 #   # myfile2
 #   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 # )
+
+install(
+  DIRECTORY
+    scripts/
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/scripts
+)
 
 #############
 ## Testing ##

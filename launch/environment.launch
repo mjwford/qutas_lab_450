@@ -4,11 +4,15 @@
 	<arg name="frame_id" default="/map" />
 	<arg name="topic_grid" default="/grid" />
 
+	<arg name="vicon" default="true" />
+
 
 	<!-- VICON Bridge -->
-	<include file="$(find vicon_bridge)/launch/vicon.launch">
-		<arg name="frame_id" value="$(arg frame_id)" />
-	</include>
+	<group if="$(arg vicon)">
+		<include file="$(find vicon_bridge)/launch/vicon.launch">
+			<arg name="frame_id" value="$(arg frame_id)" />
+		</include>
+	</group>
 
 
 	<!-- Occupancy Grid -->
