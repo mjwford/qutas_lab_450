@@ -34,8 +34,8 @@
 		<param name="axis/yaw" value="-1" type="int"/>
 		<param name="axis/roll_r" value="-1" type="int"/>
 		<param name="axis/pitch_r" value="-1" type="int"/>
-		<param name="axis/yaw_r" value="2" type="int"/>
-		<param name="axis/throttle" value="3" type="int"/>
+		<param name="axis/yaw_r" value="-1" type="int"/>
+		<param name="axis/throttle" value="2" type="int"/>
 
 		<!-- Switch to say if throttle is -1->1 or 0->1 -->
 		<param name="full_range_throttle" value="true" type="bool"/>
