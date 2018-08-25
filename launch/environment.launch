@@ -9,27 +9,24 @@
 
 
 	<!-- VRPN Clinet (VICON) -->
-	<node pkg="vrpn_client_ros" type="vrpn_client_node" name="vicon" output="screen">
-		<param name="server" value="$(arg vicon_server)" type="str" />
-		<param name="port" value="3883" type="int" />
-
-		<param name="update_frequency" value="100.0" type="double" />
-		<param name="frame_id" value="$(arg frame_id)" type="str" />
-
-		<param name="use_server_time" value="false" type="bool" />
-		<param name="broadcast_tf" value="true" type="bool" />
-		<param name="refresh_tracker_frequency" value="1.0" type="double" />
-	</node>
-	<!-- VICON Bridge -->
-	<!-- Switched to VRPN Client!
-	<include file="$(find vicon_bridge)/launch/vicon.launch">
-		<arg name="server" value="$(arg frame_id)" />
-	</include>
-	-->
 	<group if="$(arg vicon)">
+		<node pkg="vrpn_client_ros" type="vrpn_client_node" name="vicon" output="screen">
+			<param name="server" value="$(arg vicon_server)" type="str" />
+			<param name="port" value="3883" type="int" />
+
+			<param name="update_frequency" value="100.0" type="double" />
+			<param name="frame_id" value="$(arg frame_id)" type="str" />
+
+			<param name="use_server_time" value="false" type="bool" />
+			<param name="broadcast_tf" value="true" type="bool" />
+			<param name="refresh_tracker_frequency" value="1.0" type="double" />
+		</node>
+		<!-- VICON Bridge -->
+		<!-- Switched to VRPN Client!
 		<include file="$(find vicon_bridge)/launch/vicon.launch">
-			<arg name="frame_id" value="$(arg frame_id)" />
+			<arg name="server" value="$(arg frame_id)" />
 		</include>
+		-->
 	</group>
 
 
