@@ -21,19 +21,16 @@
 		<param name="refresh_tracker_frequency" value="1.0" type="double" />
 	</node>
 	<!-- VICON Bridge -->
-<<<<<<< HEAD
 	<!-- Switched to VRPN Client!
 	<include file="$(find vicon_bridge)/launch/vicon.launch">
 		<arg name="server" value="$(arg frame_id)" />
 	</include>
 	-->
-=======
 	<group if="$(arg vicon)">
 		<include file="$(find vicon_bridge)/launch/vicon.launch">
 			<arg name="frame_id" value="$(arg frame_id)" />
 		</include>
 	</group>
->>>>>>> 93f1a27949c86e99fa51ee4cb928958969d7ee53
 
 
 	<!-- Occupancy Grid -->
