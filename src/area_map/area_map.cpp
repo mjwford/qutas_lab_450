@@ -4,6 +4,9 @@
 
 #include <nav_msgs/OccupancyGrid.h>
 
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
+
 AreaMap::AreaMap() :
 	nh_("~"),
 	topic_map_("grid"),
@@ -23,28 +26,60 @@ AreaMap::AreaMap() :
 	nh_.param("map/resolution", param_map_resolution_, param_map_resolution_);
 	nh_.param("map/boarder", param_map_boarder_, param_map_boarder_);
 
-	nh_.param("obstacles/number", param_num_obs_, param_num_obs_);
-
-	for( int i = 0; i < param_num_obs_; i++ ) {
+	int i = 0;
+	std::string obs_type;
+	while( nh_.getParam("obstacles/obs_" + std::to_string(i) + "/type", obs_type) ) {
 		obstacles_t obs;
-		std::string str;
 
-		nh_.getParam("obstacles/obs_" + std::to_string(i) + "/type", str);
+		ROS_INFO("Loading obstacle %i (%s)", i, obs_type.c_str());
 
-		ROS_INFO("Loading obstacle %i (%s)", i, str.c_str());
-
-		if(str == "square") {
+		if(obs_type == "square") {
 			obs.type = OBS_SQUARE;
-		} else if(str == "circle") {
+		} else if(obs_type == "circle") {
 			obs.type = OBS_CIRCLE;
 		} else {
-			ROS_ERROR("Unknown obstacle type: %s", str.c_str());
+			obs.type = OBS_NONE;
+			ROS_ERROR("Unknown obstacle type: %s", obs_type.c_str());
 		}
 
-		nh_.getParam("obstacles/obs_" + std::to_string(i) + "/size", obs.size);
-		nh_.getParam("obstacles/obs_" + std::to_string(i) + "/position/x", obs.x);
-		nh_.getParam("obstacles/obs_" + std::to_string(i) + "/position/y", obs.y);
+		if( (obs.type != OBS_NONE) &&
+			nh_.getParam("obstacles/obs_" + std::to_string(i) + "/size", obs.size) &&
+			nh_.getParam("obstacles/obs_" + std::to_string(i) + "/position/x", obs.x) &&
+			nh_.getParam("obstacles/obs_" + std::to_string(i) + "/position/y", obs.y) ) {
 
+			obs_.push_back(obs);
+		}
+
+		i++;
+	}
+
+	if(i == 0) {
+		srand (time(NULL));
+
+		obstacles_t obs;
+		obs.type = OBS_SQUARE;
+		obs.size = 3;
+		int axes_div = 6;
+		//place other axes at random -100% to +100%
+		double p = 2*(((rand() % 101) / 100.0) - 0.5);
+		p=-1.0;
+
+		nh_.param("obstacles/size", obs.size, obs.size);
+		nh_.param("obstacles/divisor", axes_div, axes_div);
+
+		//Place obstacle along one of the axes at random
+		if(rand() % 2) {
+			obs.x = param_map_width_ / axes_div;
+			obs.y = p * param_map_width_ / axes_div;
+		} else {
+			obs.x = p * param_map_width_ / axes_div;
+			obs.y = param_map_height_ / axes_div;
+		}
+
+		obs.x += param_map_width_ / 2;
+		obs.y += param_map_height_ / 2;
+
+		ROS_INFO("No obstacles define, placing random obstacle (s:%i;d:%i;p:%0.2f)", obs.size, axes_div, p);
 		obs_.push_back(obs);
 	}
 
@@ -54,7 +89,7 @@ AreaMap::AreaMap() :
 	//Generate Map
 	generate_map();
 
-	ROS_INFO("Generated map with %i obstacles", param_num_obs_);
+	ROS_INFO("Generated map with %i obstacles", (int)obs_.size());
 
 	//Publish map data (latched)
 	pub_map_.publish(msg_out_);

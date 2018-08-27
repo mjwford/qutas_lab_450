@@ -5,21 +5,17 @@ map:
   boarder: true
 
 obstacles:
-  number: 1 #3
-  obs_0:
-    type: "square"
+  rand:
     size: 3
-    position:
-      x: 15
-      y: 15
+    divisor: 6
+  #obs_0:
+  #  type: "square"
+  #  size: 3
+  #  position:
+  #    x: 15
+  #    y: 15
   #obs_1:
   #  type: "circle"
-  #  size: 5
-  #  position:
-  #    x: 40
-  #    y: 30
-  #obs_2:
-  #  type: "triangle"
   #  size: 5
   #  position:
   #    x: 40

@@ -8,15 +8,16 @@
 #include <string>
 
 enum obstacles_type_t {
-	OBS_SQUARE = 0,
+	OBS_NONE = 0,
+	OBS_SQUARE,
 	OBS_CIRCLE
 };
 
 struct obstacles_t {
 	obstacles_type_t type;
-	double size;
-	double x;
-	double y;
+	int size;
+	int x;
+	int y;
 };
 
 class AreaMap {
