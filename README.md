@@ -28,5 +28,4 @@ The following launch files are provided as a meants of providing a quick-start f
 There are two modes available for defining obstacles within the flight area when using the `qutas_lab_450/area_map_node` node. The `environment.launch` file automatically loads in the file `launch/map_layout.yaml`. In this file, the obstacles are defined in the `obstacles:` parameters.
 
 When the node first loads, it checks to see if any obstacles have been statically defined. If some are found, these obstacles are used to generate the desired layout. If none are found, the node falls back to generating a random obstacle along the following layout:
-
-[[https://raw.github.com/qutas/qutas_lab_450/master/resources/occupancy_rand.png|alt=occupancy_random_placement]]
+![Obstacle Random Placement](https://raw.github.com/qutas/qutas_lab_450/master/resources/occupancy_rand.png)
