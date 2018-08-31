@@ -7,7 +7,6 @@
 		<!-- Controller Parameters /-->
 		<!-- CHANGE THIS! -->
 		<rosparam command="load" file="/home/uavusrgX/catkin_ws/launch/mavel_params.yaml"/>
-		<!-- CHANGE THIS! -->
 
 		<!-- Interface Topics /-->
 		<remap from="~command/attitude" to="/mavros/setpoint_raw/attitude"/>
@@ -25,5 +24,5 @@
 
 	<!-- Pose Reference -->
 	<node pkg="topic_tools" type="drop" name="mocap_drop" clear_params="true" output="screen"
-	args="/vicon/$(arg uav_name)/psoe 9 10 /mavros/mocap/pose"/>
+	args="/vicon/$(arg uav_name)/pose 9 10 /mavros/mocap/pose"/>
 </launch>
