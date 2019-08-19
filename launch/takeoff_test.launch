@@ -1,15 +1,7 @@
 <?xml version='1.0'?>
 <launch>
-	<!-- Load the waypoints from file, and send them as a ROS topic -->
-	<node pkg="contrail" type="load_waypoints" name="load_waypoints" clear_params="true" output="screen">
-		<param name="frame_id" value="map" />
-		<rosparam command="load" file="$(find qutas_lab_450)/waypoints/takeoff_test.yaml"/>
-	</node>
-
-	<!-- Convert the simple waypoint topic to a standard nav_msgs/Path topic -->
-	<node pkg="contrail" type="converter_waypoints_path" name="wp_converter" clear_params="true" output="screen">
-		<!-- Remap topic names to match what the uavusr_emulator expects -->
-		<remap from="~waypoints" to="waypoints" />
-		<remap from="~path" to="/mavel/reference/contrail/path" />
+	<node pkg="contrail" type="dispatcher" name="waypoint_dispatcher" clear_params="true" output="screen">
+		<param name="action_topic" value="/mavel/contrail" />
+		<rosparam command="load" file="$(find qutas_lab_450)/config/takeoff_test.yaml"/>
 	</node>
 </launch>
