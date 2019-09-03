@@ -18,7 +18,6 @@ AreaMap::AreaMap() :
 	param_num_obs_(0) {
 
 	//Load node parameters
-	nh_.param("topic_map", topic_map_, topic_map_);
 	nh_.param("frame_id", param_frame_id_, param_frame_id_);
 
 	nh_.param("map/width", param_map_width_, param_map_width_);
@@ -62,7 +61,7 @@ AreaMap::AreaMap() :
 		int axes_div = 6;
 		//place other axes at random -100% to +100%
 		double p = 2*(((rand() % 101) / 100.0) - 0.5);
-		p=-1.0;
+		//p=-1.0;
 
 		nh_.param("obstacles/size", obs.size, obs.size);
 		nh_.param("obstacles/divisor", axes_div, axes_div);
@@ -84,7 +83,7 @@ AreaMap::AreaMap() :
 	}
 
 	//Setup publisher
-	pub_map_ = nh_.advertise<nav_msgs::OccupancyGrid>(topic_map_, 1, true);
+	pub_map_ = nh_.advertise<nav_msgs::OccupancyGrid>("grid", 1, true);
 
 	//Generate Map
 	generate_map();
