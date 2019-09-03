@@ -29,9 +29,14 @@
 		-->
 	</group>
 
-	<!-- Takeoff Location -->
+	<!-- Takeoff Location (for student tests) -->
 	<node pkg="tf2_ros" type="static_transform_publisher" name="tf_home"
 	args="-1 -1 0 0 0 0 map home"
+	clear_params="true" output="screen"/>
+
+	<!-- World Location (for MAVROS) -->
+	<node pkg="tf2_ros" type="static_transform_publisher" name="tf_world"
+	args="0 0 0 0 0 0 world map"
 	clear_params="true" output="screen"/>
 
 	<!-- Occupancy Grid -->
