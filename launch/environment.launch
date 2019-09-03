@@ -29,16 +29,19 @@
 		-->
 	</group>
 
+	<!-- Takeoff Location -->
+	<node pkg="tf2_ros" type="static_transform_publisher" name="tf_home"
+	args="-1 -1 0 0 0 0 map home"
+	clear_params="true" output="screen"/>
 
 	<!-- Occupancy Grid -->
 	<node pkg="qutas_lab_450" type="area_map_node" name="area_map" clear_params="true" output="screen">
-		<param name="topic_map" value="$(arg topic_grid)" type="str" />
+		<remap from="~/grid" to="$(arg topic_grid)"/>
 		<param name="frame_id" value="$(arg frame_id)" type="str" />
 
 		<!-- Map Parameters /-->
 		<rosparam command="load" file="$(find qutas_lab_450)/launch/map_layout.yaml"/>
 	</node>
-
 
 	<!-- Grid Visualization -->
 	<node pkg="qutas_lab_450" type="area_viz_node" name="area_viz" clear_params="true" output="screen">
