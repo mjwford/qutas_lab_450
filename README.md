@@ -23,9 +23,16 @@ The following launch files are provided as a meants of providing a quick-start f
 		- `mavel/mavel_node`: Performs UAV position control
 		- `odom_sync/odom_sync_node`: Syncronizer tool to combine Pose and Twist data into an Odometry message (for mavel)
 		- `topic_tools/drop`: Set to drop a specific amount of pose messages (from the VICON interface) such that low-baud telemetry systems don't get overloaded when sending pose estimates to the flight controller
+- `takeoff_test.launch`: Starts a connection to contrail to command the UAV to raise to 1m and then return to land. Good performing the first autonomous test flight.
 
 ## Advanced usage of area_map_node
 There are two modes available for defining obstacles within the flight area when using the `qutas_lab_450/area_map_node` node. The `environment.launch` file automatically loads in the file `launch/map_layout.yaml`. In this file, the obstacles are defined in the `obstacles:` parameters.
 
 When the node first loads, it checks to see if any obstacles have been statically defined. If some are found, these obstacles are used to generate the desired layout. If none are found, the node falls back to generating a random obstacle along the following layout:
 ![Obstacle Random Placement](https://raw.github.com/qutas/qutas_lab_450/master/resources/occupancy_rand.png)
+
+
+## Contrail Movement Scripts
+The following contrail scripts are included for use with the `dispatcher`:
+- `config/takeoff_test.yaml`: An example of a simple flight to hover to 1m, then land (used for `takeoff_test.launch`).
+- `config/takeoff_quick.yaml`: An example of how to perform a takeoff to quickly escape the ground effect (**does not land**)
