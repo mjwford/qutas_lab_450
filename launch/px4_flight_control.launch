@@ -32,6 +32,6 @@
 	</include>
 
 	<!-- Pose Reference -->
-	<node pkg="topic_tools" type="drop" name="mocap_drop" clear_params="true" output="screen"
-	args="/vicon/$(arg uav_name)/pose 9 10 /mavros/mocap/pose"/>
+	<node pkg="topic_tools" type="relay" name="mocap_relay" clear_params="true" output="screen"
+	args="/vicon/$(arg uav_name)/pose /mavros/vision_pose/pose"/>
 </launch>
