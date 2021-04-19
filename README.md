@@ -24,6 +24,7 @@ The following launch files are provided as a meants of providing a quick-start f
 		- `odom_sync/odom_sync_node`: Syncronizer tool to combine Pose and Twist data into an Odometry message (for mavel)
 		- `topic_tools/drop`: Set to drop a specific amount of pose messages (from the VICON interface) such that low-baud telemetry systems don't get overloaded when sending pose estimates to the flight controller
 - `takeoff_test.launch`: Starts a connection to contrail to command the UAV to raise to 1m and then return to land. Good performing the first autonomous test flight.
+- `assessment_sim_2021.launch`: Starts the UAVASR emulator, spar, the assorted QUTAS lab environment nodes to simulate the assessment conditions (occupancy grid generation an visualisation).
 
 ## Advanced usage of area_map_node
 There are two modes available for defining obstacles within the flight area when using the `qutas_lab_450/area_map_node` node. The `environment.launch` file automatically loads in the file `launch/map_layout.yaml`. In this file, the obstacles are defined in the `obstacles:` parameters.
