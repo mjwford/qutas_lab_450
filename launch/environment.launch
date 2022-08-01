@@ -3,15 +3,17 @@
 	<!-- Common Settings -->
 	<arg name="frame_id" default="map" />
 	<arg name="topic_grid" default="/grid" />
-	<arg name="vicon_server" default="192.168.1.101"/>
+	<arg name="vicon_server_dvp" default="192.168.1.101"/>
 
+	<!-- Configure for each system Setup -->
 	<arg name="vicon" default="true" />
-
+	<arg name="optitrack" default="false" />
+	<arg name="vrpn_object_name" default="uav" />
 
 	<!-- VRPN Clinet (VICON) -->
 	<group if="$(arg vicon)">
 		<node pkg="vrpn_client_ros" type="vrpn_client_node" name="vicon" output="screen">
-			<param name="server" value="$(arg vicon_server)" type="str" />
+			<param name="server" value="$(arg vicon_server_dvp)" type="str" />
 			<param name="port" value="3883" type="int" />
 
 			<param name="update_frequency" value="100.0" type="double" />
@@ -27,6 +29,14 @@
 			<arg name="server" value="$(arg frame_id)" />
 		</include>
 		-->
+	</group>
+
+	<!-- VRPN Clinet (OptiTrack) -->
+	<group if="$(arg optitrack)">
+		<!-- This node will launch the node that bridges vicon (optitrack) and MAVROS -->
+		<include file="$(find qutas_lab_450)/launch/vrpn_optiTrack.launch">
+			<arg name="vrpn_object_name" value="$(arg vrpn_object_name)" />
+  		</include>
 	</group>
 
 	<!-- Takeoff Location (for student tests) -->
