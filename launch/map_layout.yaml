@@ -2,7 +2,7 @@ map:
   width: 80
   height: 80
   resolution: 0.1
-  boarder: true
+  boarder: false
 
 obstacles:
   rand:
